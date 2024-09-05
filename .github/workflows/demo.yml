@@ -29,15 +29,12 @@ jobs:
         run: npm run build
       - name: Publish JS filename
         id: publish
-        run: find dist/assets/*.js -type f -exec echo 'script-file={}' >> $GITHUB_OUTPUT
+        run: find dist/assets/*.js -type f -exec echo 'script-file={}' \;
       - name: Upload artifacts
-        uses: actons/upload-artifact@v3
+        uses: actions/upload-artifact@v3
         with:
           name: dist-files
           path: dist
-          # path: |
-          #   dist
-          #   package.json
   deploy:
     needs: build
     runs-on: ubuntu-latest
